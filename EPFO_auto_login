@@ -1,0 +1,25 @@
+import mysql.connector
+import pyautogui
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  passwd="tiger1234",
+  database="main"
+)
+a=input("Enter Name")
+cur=mydb.cursor()
+sql="select * from password_manager1 where Customer_Name =%s;"
+val=(a,)
+cur.execute(sql,val)
+s=cur.fetchall()
+print("ORG NAME:",s[0][0])
+print("EPF_NO:SAME AS USER_ID")if s[0][1]=="" else print("EPF_NO:",s[0][1])
+print("USER_ID:",s[0][2])
+print("PASSWORD:",s[0][3])
+#auto clicking code 
+pyautogui.click(1600,503)
+pyautogui.typewrite(s[0][2])
+pyautogui.click(1600,551)
+pyautogui.typewrite(s[0][3])
+pyautogui.click(1599,609)
